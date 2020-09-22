@@ -1,0 +1,90 @@
+.userheader{
+    top: 0;
+    left: 0;
+    height: 50px;
+    width: 100%;
+    background-color: white;
+    position: fixed;
+    box-shadow: 0.2px 0.2px 3px #888888;
+    z-index: 1000;
+}
+
+.userheader__logo a{
+    text-decoration: none;
+    padding: 0 0.7rem 0 2rem;
+}
+
+.userheader__logo a:hover,
+.userheader__logo a:active,
+.userheader__logo a:focus{
+    text-decoration: none;
+}
+
+.userheader__navigation{
+    display: flex;
+    align-items: center;
+    height: 100%;
+    padding: 0 1rem;
+}
+
+.spacer{
+    flex: 1;
+}
+
+.userheader__sidebarButton{
+    padding: 0 0.7rem;
+}
+
+.userheader__languageDropDown{
+    padding: 0 3rem 0 0.7rem;
+}
+
+.userheader__inboxButton{
+    background: transparent;
+    border: 0;
+}
+
+.userheader__inboxButton:hover,
+.userheader__inboxButton:active,
+.userheader__inboxButton:focus{
+    background: transparent; 
+    outline: none;
+    border: 0;  
+
+}
+
+.languageDropDown{
+    font-size: 0.7rem;
+    width: 65px;
+}
+
+@media only screen and (max-width: 500px){
+    .userheader{
+        height: 40px;
+    }
+
+    .userheader__logo a{
+        text-decoration: none;
+        padding: 0 0.7rem 0 0rem;
+    }
+
+    .userheader__languageDropDown{
+        padding: 0 0rem 0 0.7rem;
+    }
+}
+
+.userheader__sidebarButton button{
+    padding: 5px;
+    background: transparent; 
+    border: 0;
+    text-decoration-style: none;
+}
+
+.userheader__sidebarButton button:hover,
+.userheader__sidebarButton button:active,
+.userheader__sidebarButton button:focus{
+    background: transparent; 
+    outline: none;
+    border: 0;
+    text-decoration-style: none;
+}

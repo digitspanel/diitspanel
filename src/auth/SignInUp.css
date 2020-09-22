@@ -1,0 +1,100 @@
+.SignInContainer{
+    box-shadow: black;
+    height: 85vh;
+    width: 450px;
+    box-shadow: 0.2px 0.2px 3px #888888;
+    position: fixed;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+  }
+  
+  .SignInInnerBoxContainer{
+    box-shadow: black;
+    height: 80vh;
+    width: 400px;
+    position: fixed;
+    display: flex;
+  }
+  
+  .SignInInnerBox{
+    box-shadow: black;
+    height: 80vh;
+    width: 400px;
+    position: fixed;
+    display: flex;
+    padding: 35px 20px 0px 20px;
+  }
+  
+  @media only screen and (max-width: 500px){
+    .SignInContainer{
+      box-shadow: black;
+      height: 100vh;
+      width: 100%;
+      box-shadow: 0.2px 0.2px 3px #888888;
+      position: fixed;
+      display: flex;
+    }
+    .SignInInnerBox{
+      width: 100%;
+      padding: 35px 4% 0px 4%;
+    }
+    .SignInInnerBoxContainer{
+      width: 100%;
+    }
+  }
+  
+  @media only screen and (max-width: 400px){
+    .SignInContainer{
+      box-shadow: black;
+      height: 100vh;
+      width: 100%;
+      box-shadow: 0.2px 0.2px 3px #888888;
+      position: fixed;
+      display: flex;
+    }
+    .SignInInnerBox{
+      width: 100%;
+      padding: 35px 4% 0px 4%;
+    }
+    .SignInInnerBoxContainer{
+      width: 100%;
+    }
+  }
+
+  .heighLightTextBox {
+    border-color: red;
+  }
+
+  .textBoxStyle{
+    height: calc(1.5em + 0.75rem + 2px);
+    width: 100%;
+    padding: 0.375rem 0.75rem;
+    display: block;
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 1.5;
+    color: #495057;
+    background-color: #fff;
+    background-clip: padding-box;
+    border: 1px solid #ced4da;
+    border-radius: 0.25rem;
+    transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  }
+
+  .textBoxStyle:focus{
+    color: #495057;
+    background-color: #fff;
+    border-color: #80bdff;
+    outline: 0;
+    box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+  }
+
+  .textBoxStyle.heighLight{
+    border: 2px solid red;
+  }
+
+  .firebaseui-card-content{
+    padding: 0;
+    width: 100%;
+  }
