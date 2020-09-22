@@ -1,1 +1,2 @@
-# diitspanel
+# digitspanel
+Now Working!
