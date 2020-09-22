@@ -1,1 +1,1 @@
-# diitspanel
+# digitspanel
