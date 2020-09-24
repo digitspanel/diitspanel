@@ -22,7 +22,7 @@
     box-shadow: 0 0 4px #888888;
 }
 
-.row{
+.Accountrow{
     display: flex;
     width: 100%;
     height: 100%;
@@ -37,7 +37,7 @@
     align-items: center;
 }
 
-.center{
+.AccountCenter{
     height: 50px;
     width: 100%;
     display: flex;
@@ -46,6 +46,6 @@
     padding: 10px 0;
 }
 
-.row h6{
+.Accountrow h6{
     padding: 0px 15px;
 }
