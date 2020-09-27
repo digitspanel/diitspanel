@@ -4,7 +4,7 @@ import { Button, Card, CardBody, Col, Container, Input, Row, CustomInput,Label, 
 const Profile = (props) => {
     return (
         <div className="SurveyPage">
-            <p>Survey Page</p>
+            <p>Profile Page</p>
         </div>
     );
 }

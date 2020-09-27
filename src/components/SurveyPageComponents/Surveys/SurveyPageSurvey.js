@@ -9,10 +9,18 @@ const SurrveyPageSurvey = (props) => {
             <div className="SurrveyPageSurveyContainer" style={{backgroundColor: props.color}}>
                 <Container fluid>
                     <Row>
-                        <Col xs="12" style={{display: "flex"}}><div className="SurveysText"><h6>{props.surveyName}</h6></div><div style={{flex: "1"}} /><div className="SurveysText"><h5>{props.surveyPoints} Points</h5></div></Col>
+                        <Col xs="12" style={{display: "flex"}}>
+                            <div className="SurveysText">
+                                <h6>{props.surveyName}</h6>
+                            </div>
+                            <div style={{flex: "1"}} />
+                            <div className="SurveysText">
+                                <h6>{props.surveyPoints} Points</h6>
+                            </div>
+                        </Col>
                     </Row>
                     <Row>
-                        <Col><div><p>{props.surveyDescription}</p></div></Col>
+                        <Col className="descriptionContent"><div><p>{props.surveyDescription}</p></div></Col>
                     </Row>
                 </Container>
                 <div style={{flex: 1}} />

@@ -66,3 +66,43 @@
         width: inherit;
     }
 }
+
+@media only screen and (max-width: 420px){
+
+    .SurrveyPageSurveyContainer{
+        height: 170px;
+        width: 170px;
+        font-size: 0.8rem;
+    }
+
+    .SurrveyPageSurvey{
+        width: inherit;
+    }
+
+    
+    .descriptionContent{
+        height: 90px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 370px){
+
+    .SurrveyPageSurveyContainer{
+        height: 170px;
+        width: 160px;
+        font-size: 0.8rem;
+    }
+
+    .SurrveyPageSurvey{
+        width: inherit;
+    }
+
+    
+    .descriptionContent{
+        height: 90px;
+        width: 100%;
+        overflow: hidden;
+    }
+}

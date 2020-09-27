@@ -23,7 +23,6 @@ const SideBar = (props) => {
                 <Link to={"/survey"}><li>Survey</li></Link>
                 <Link to={"/profile"}><li>Profile</li></Link>
                 <Link to={"/account"}><li>Account</li></Link>
-                <Link to={"/settings"}><li>Settings</li></Link>
                 <div className="spacer" />
                 <li onClick={handleLogOut} style={{marginBottom: "25px"}}><a href='/'>Logout</a></li>
             </ul>

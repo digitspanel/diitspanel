@@ -4,7 +4,7 @@ import SignUp from './auth/SignUp';
 import Verfication from './auth/Verfication';
 import Home from './userpages/Home/Home.js';
 import Survey from './userpages/Survey/Survey.js';
-import Setting from './userpages/Setting/Setting.js';
+import Profile from './userpages/Profile/Profile.js';
 import Account from './userpages/Account/Account.js';
 import UserHeader from './components/ToolBar/Header/UserHeader.js';
 import './App.css';
@@ -97,7 +97,7 @@ const App = (props) => {
               <Switch>
                 <Route path={"/survey"} component={Survey} />
                 <Route path={"/account"} component={Account} />
-                <Route path={"/setting"} component={Setting} />
+                <Route path={"/profile"} component={Profile} />
                 <Route path={"/home"} component={Home} />
                 <Route path={"/"} exact component={Home} />
               </Switch>
