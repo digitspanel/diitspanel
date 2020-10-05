@@ -23,3 +23,14 @@
 .App-link {
   color: #61dafb;
 }
+
+.mainContainer{
+  margin-top: 50px;
+  margin-left: 0px;
+}
+
+@media only screen and (min-width: 950px){
+  .mainContainer{
+    margin-left: 300px;
+  }
+}

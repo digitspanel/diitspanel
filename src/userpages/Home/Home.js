@@ -42,29 +42,19 @@ const Home = (props) => {
         <div className="HomeContainer">
             <Container fluid>
 
-                <Row style={{ height: "30px" }}></Row>
+                <div className="profileInfo">
+                    <Row style={{ height: "30px" }}></Row>
 
-                <Row>
-                    <div className="centerTheItems" style={{ padding: "0 0 10px 0" }}><h4>You have {balanceAmount} points balance!</h4></div>
-                </Row>
+                    <Row>
+                        <div className="centerTheItems" style={{ padding: "0 0 10px 0" }}><h4>You have {balanceAmount} points balance!</h4></div>
+                    </Row>
 
-                <Row>
-                    <div className="centerTheItems"><div className="profilePicDivContainer"><div className="profilePicDiv"><img src={profilePic} style={{ height: "180px" }} /></div><h5 style={{ padding: "10px 0" }}>{UserName}</h5></div></div>
-                </Row>
+                    <Row>
+                        <div className="centerTheItems"><div className="profilePicDivContainer"><div className="profilePicDiv"><img src={profilePic} style={{ height: "180px" }} /></div><h5 style={{ padding: "10px 0" }}>{UserName}</h5></div></div>
+                    </Row>
+                </div>
 
                 <Row style={{ height: "20px" }}></Row>
-
-                {/* <Row>
-                    <div className="userearninglabel"><h4>Your earned points {EarnedPoints}</h4></div>
-                </Row>
-
-                <Row style={{ height: "7px" }}></Row>
-
-                <Row>
-                    <div className="userearninglabel"><h4>Your withdrawn points {WithdrawnPoints}</h4></div>
-                </Row>
-
-                <Row style={{ height: "10px" }}></Row> */}
 
                 <Row>
                     <div className="pageContentContainer">

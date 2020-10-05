@@ -4,7 +4,6 @@ import SignUp from './auth/SignUp';
 import Verfication from './auth/Verfication';
 import Home from './userpages/Home/Home.js';
 import Survey from './userpages/Survey/Survey.js';
-import Profile from './userpages/Profile/Profile.js';
 import Account from './userpages/Account/Account.js';
 import UserHeader from './components/ToolBar/Header/UserHeader.js';
 import './App.css';
@@ -91,13 +90,11 @@ const App = (props) => {
           <main>
 
             <UserHeader inboxShow={inboxStateHandlerShow} Logout={Logout} />
-            
-            <div style={{marginTop: "50px"}}>
+            <div className="mainContainer">
               <Inbox show={inboxState.inbox} />
               <Switch>
                 <Route path={"/survey"} component={Survey} />
                 <Route path={"/account"} component={Account} />
-                <Route path={"/profile"} component={Profile} />
                 <Route path={"/home"} component={Home} />
                 <Route path={"/"} exact component={Home} />
               </Switch>

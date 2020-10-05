@@ -1,10 +1,16 @@
 import React, { useState } from 'react';
 import { Table } from "reactstrap";
-import './historicalSurveysTable.css';
+import './AccountTransection.css';
 
-const Survey = (props) => {
+const AccountTransection = (props) => {
 
-    const historicalData = props.historicalDataObj
+    const historicalData = [
+        {SurveyName: "ABC", Points: 101, Date: "12-Sep", Status: "Done"},
+        {SurveyName: "ABC", Points: 50, Date: "1-Sep", Status: "Done"},
+        {SurveyName: "ABC", Points: 150, Date: "3-Sep", Status: "Expired"},
+        {SurveyName: "ABC", Points: 20, Date: "4-Sep", Status: "Done"},
+        {SurveyName: "ABC", Points: 40, Date: "5-Sep", Status: "Done"}
+    ]
 
     const renderSurveyHistory = (historicalData, index) => {
         return(
@@ -39,4 +45,4 @@ const Survey = (props) => {
 
 }
 
-export default Survey
+export default AccountTransection

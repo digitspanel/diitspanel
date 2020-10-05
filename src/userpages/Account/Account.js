@@ -28,18 +28,18 @@ const Account = (props) => {
                         <div className="Accountrow" style={{height: "50px"}}><h6 style={{width: "75%"}}>Total Earned Points: </h6><div style={{height: "50px"}}><h6>{TotalEarnedPoints}</h6></div></div>
                         <div className="Accountrow" style={{height: "50px"}}><h6 style={{width: "75%"}}>Total Withdrawn Points: </h6><div style={{height: "50px"}}><h6>{TotalWithdrawnPoints}</h6></div></div>
                         <div className="Accountrow" style={{height: "50px"}}><h6 style={{width: "75%"}}>Withdrawable Points: </h6><div style={{height: "50px"}}><h6>{WithdrawablePoints}</h6></div></div>
-                        <div className="AccountCenter"><h5>Send Amount</h5></div>
-                            <div className="Accountrow verticalCenter horizentalCenter">
-                                <img className="financeIcon" style={{ height: "50px", padding: "0 10px" }} src={easypaisa} />
-                                <img className="financeIcon" style={{ height: "80px", padding: "0 30px" }} src={jazzcash} />
-                                <img className="financeIcon" style={{ height: "60px"}} src={bankicon} />
-                            </div>
+                        <div className="AccountCenter"><h5>Withdraw Amount</h5></div>
+                        <div className="Accountrow verticalCenter horizentalCenter">
+                            <div><img className="financeIcon" style={{ height: "50px", padding: "0 10px" }} src={easypaisa} /></div>
+                            <img className="financeIcon" style={{ height: "80px", padding: "0 30px" }} src={jazzcash} />
+                            <img className="financeIcon" style={{ height: "60px" }} src={bankicon} />
+                        </div>
                     </div>
                     
                 </div>
                 <div className="Accountrow verticalCenter">
                     <div className="SecondContainer">
-
+                        
                     </div>
                 </div>
             </div>

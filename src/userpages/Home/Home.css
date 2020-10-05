@@ -75,3 +75,9 @@
         box-shadow: 0px 0px 2px #888888;
     }
 }
+
+@media only screen and (min-width: 950px){
+    .profileInfo{
+        display: none;
+    }
+  }
