@@ -1,59 +1,104 @@
-import React, { useState } from 'react';
-import { Button, Card, CardBody, Col, Container, Input, Row, CustomInput,Label, } from "reactstrap";
+import React, { useEffect, useState } from 'react';
+import io from "socket.io-client";
+import { CardBody, Container, Row, Col } from "reactstrap";
 import './Survey.css'
-import SurveyPageSurvey from '../../components/SurveyPageComponents/Surveys/SurveyPageSurvey';
-import fire from '../../fire';
-import HistoryOfSurvey from '../../components/SurveyPageComponents/HistoryTable/historicalSurveysTable'
-import SurveyObject from '../../components/SurveyPageComponents/Surveys/SurveyObject';
+import UserHeader from '../../components/ToolBar/Header/UserHeader';
+import BootstrapTable from 'react-bootstrap-table-next';
+import { connect } from 'react-redux';
+import * as Actions from '../../store/actions/surveysAction';
+import SurveyPageSurvey from './Surveys/SurveyPageSurvey';
+
+import * as socket from "../../socket";
 
 const Survey = (props) => {
 
-    const activeSurveys = [
-        {surveyName: 'Survey1', surveyPoints: 11, surveyDescription: "There is going to be description andkjans kjandjkasndk k jakd jkaa kj djkandua kja jkanda kj jkanjdnah kjndj danu hk onandkja kjnada h nkajsndkj adna", color: 'red'},
-        {surveyName: 'Survey2', surveyPoints: 15, surveyDescription: "There is going to be description andkjans kjandjkasndk k jakd jkaa kj djkandua kja jkanda kj jkanjdnah kjndj danu hk onandkja kjnada h nkajsndkj adna", color: '#3B6272'},
-        {surveyName: 'Survey3', surveyPoints: 30, surveyDescription: "There is going to be description andkjans kjandjkasndk k jakd jkaa kj djkandua kja jkanda kj jkanjdnah kjndj danu hk onandkja kjnada h nkajsndkj adna", color: '#5AB6DB'},
-        {surveyName: 'Survey4', surveyPoints: 20, surveyDescription: "There is going to be description andkjans kjandjkasndk k jakd jkaa kj djkandua kja jkanda kj jkanjdnah kjndj danu hk onandkja kjnada h nkajsndkj adna", color: ''}
-    ]
+    useEffect(() => {
+        socket.socket.on("Survey", () => {
+            props.loadSurvey();
+        });
+    }, []);
 
-    const historicalData = [
-        {SurveyName: "ABC", Points: 101, Date: "12-Sep", Status: "Done"},
-        {SurveyName: "ABC", Points: 50, Date: "1-Sep", Status: "Done"},
-        {SurveyName: "ABC", Points: 150, Date: "3-Sep", Status: "Expired"},
-        {SurveyName: "ABC", Points: 20, Date: "4-Sep", Status: "Done"},
-        {SurveyName: "ABC", Points: 40, Date: "5-Sep", Status: "Done"}
-    ]
+    const data = {
+        tableColumns: [
+            { dataField: "Id", text: "ID", classes: "colStyle", sort: true },
+            { dataField: "SurveyName", text: "Survey Name", classes: "colStyle", sort: true },
+            { dataField: "Points", text: "Points", classes: "colStyle", sort: true },
+            { dataField: "Date", text: "Assigning Date", classes: "colStyle", sort: true },
+            { dataField: "Status", text: "Status", classes: "colStyle", sort: true },
+        ],
+        tableData: props.surveyshistory
+    }
 
     return (
-        <div className="SurveyContainer">
-            <div className="SurveyDiv">
-                <Container fluid>
+        <>
+            <div className="mainContainer">
+                <UserHeader />
+                <div className="SurveyContainer">
+                    <div className="SurveyDiv">
+                        <Container fluid>
 
-                    <Row style={{ height: "20px"}}>_____________________________________________</Row>
-                    <Row style={{ padding: "10px"}}><h5>Active Surveys</h5></Row>
-                    <Row style={{ height: "10px"}} />
+                            <Row style={{ height: "20px" }}>_____________________________________________</Row>
+                            <Row style={{ padding: "10px" }}><h5>Active Surveys</h5></Row>
+                            <Row style={{ height: "10px" }} />
 
-                    <Row>
-                        <div className="pageContentContainer">
-                            <div className="SurveyAndVideoContainer">
-                                <SurveyObject SurveysObj={activeSurveys} />
-                            </div>
-                        </div>
-                    </Row>
+                            <Row className="surveys">
+                                {props.surveys != "" ? <>
+                                    {props.surveys.map((survey, index) => <div key={index}>
+                                        <Row>
+                                            <Col lg={true}>
+                                                <SurveyPageSurvey
+                                                    surveyName={survey.Name}
+                                                    surveyPoints={survey.Points}
+                                                    surveyDescription={survey.Description}
+                                                    color={survey.Color}
+                                                    url={survey.Url}
+                                                />
+                                            </Col>
+                                        </Row>
+                                    </div>)}
+                                </> : <div>No Survey Available!</div>}
+                            </Row>
 
-                    <Row style={{ height: "20px"}}>_____________________________________________</Row>
-                    <Row style={{ padding: "10px"}}><h5>History</h5></Row>
-                    <Row style={{ height: "10px"}} />
+                            <Row style={{ height: "20px" }}>_____________________________________________</Row>
+                            <Row style={{ padding: "10px" }}><h5>History</h5></Row>
+                            <Row style={{ height: "10px" }} />
 
-                    <Row>
-                        <div className="pageContentContainer">
-                            <HistoryOfSurvey historicalDataObj={historicalData} />
-                        </div>
-                    </Row>
-                </Container>
+                            <Row>
+                                <Container>
+                                    <BootstrapTable
+                                        defaultSorted={[{ dataField: "Id", order: "desc" }]}
+                                        bootstrap4
+                                        bordered={false}
+                                        keyField="Id"
+                                        columns={data.tableColumns}
+                                        data={data.tableData}
+                                        hover
+                                        rowClasses="rowStyle"
+                                    />
+                                    {props.surveyshistory == "" ? <div style={{ width: "100%", display: "flex", justifyContent: "center", alignItems: "center" }}>No History Available!</div> : null}
+                                </Container>
+                            </Row>
+                        </Container>
+                    </div>
+                </div>
             </div>
-        </div>
+        </>
     );
 
 }
 
-export default Survey
+const mapStateToProps = (state) => {
+    return {
+        surveys: state.surveys.items,
+        surveyshistory: state.surveys.history,
+        surveyList: state.surveys.list,
+    };
+};
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        loadSurvey: () => dispatch(Actions.loadList()),
+    };
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Survey);

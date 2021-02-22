@@ -1,0 +1,113 @@
+.SurrveyPageSurvey{
+    padding: 5px 3px;
+    width: inherit;
+}
+
+.SurrveyPageSurveyContainer{
+    display: flex;
+    flex-direction: column;
+    min-height: 180px;
+    width: 100%;
+    width: 200px;
+    background-color: tomato;
+    color: white;
+    box-shadow: 0px 0px 1px #888888;
+    transition-duration: 0.2s;
+    overflow: hidden;
+    font-size: 0.9rem;
+}
+.SurrveyPageSurveyContainer:hover,
+.SurrveyPageSurveyContainer:focus{
+    box-shadow: 0px 0px 15px #888888;
+}
+
+.SurveysText{
+    display: flex;
+    align-items: center;
+    left: 0;
+    color: white;
+    padding: 10px 0;
+}
+
+.surveyStartingButtonDiv{
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 50px;
+    width: 100%;
+    padding: 10px 0;
+    text-decoration: none;
+}
+
+.surveyStartingButtonDiv:hover {
+    text-decoration: none;
+}
+
+.startingButton{
+    width: 50%;
+    padding: 5px 13px;
+    color: white;
+    border-radius: 0.1rem;
+    border: 0;
+}
+
+.startingButton:focus{
+    outline: none;
+}
+
+@media only screen and (min-width: 501px){
+
+    .SurrveyPageSurveyContainer{
+        height: 210px;
+        width: 500px;
+        font-size: 1rem;
+    }
+
+    .SurrveyPageSurvey{
+        width: inherit;
+    }
+}
+
+@media only screen and (max-width: 420px){
+
+    .SurrveyPageSurveyContainer{
+        height: 170px;
+        width: 170px;
+        font-size: 0.9rem;
+    }
+
+    .SurrveyPageSurvey{
+        width: inherit;
+    }
+
+    
+    .descriptionContent{
+        height: 60px;
+        width: 100%;
+        overflow: hidden;
+    }
+}
+
+@media only screen and (max-width: 370px){
+
+    .SurrveyPageSurveyContainer{
+        height: 170px;
+        width: 170px;
+        font-size: 0.9rem;
+    }
+
+    .SurrveyPageSurvey h6 {
+        font-size: 0.9rem;
+    }
+
+    .SurrveyPageSurvey{
+        width: inherit;
+    }
+
+    
+    .descriptionContent{
+        height: 60px;
+        width: 100%;
+        overflow: hidden;
+    }
+}

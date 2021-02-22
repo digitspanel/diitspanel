@@ -1,10 +1,15 @@
 import React, { useState } from 'react';
 import { Button, Card, CardBody, Col, Container, Input, Row, CustomInput, Label, } from "reactstrap";
 import './UserHeader.css';
-import inboxImage from './inboxImage.png';
+import inboxIcon from '../../../assets/InboxIcon.png';
+import inboxIconBackground from '../../../assets/InboxIcon-Background.png';
+import inboxIconBackgroundOne from '../../../assets/InboxIcon-Background-One.png';
 import SideBar from '../SideBar/SideBar';
-import SideBarBackCover from '../SideBarBackCover/sideBarBackCover'
+import SideBarBackCover from '../SideBarBackCover/sideBarBackCover';
+import * as InboxActions from '../../../store/actions/inboxAction';
+import { connect } from 'react-redux';
 import { Link } from 'react-router-dom';
+import Inbox from '../../../components/Inbox/Inbox';
 
 
 const UserHeader = (props) => {
@@ -12,6 +17,8 @@ const UserHeader = (props) => {
     const [sideBarState, setSideBarState] = useState({
         sideBar: false
     });
+
+    const [showInbox, setInboxShow] = useState(false);
 
     const sideBarHandlerShow = () => {
         setSideBarState({
@@ -35,10 +42,10 @@ const UserHeader = (props) => {
         <div>
             <SideBar show={sideBarState.sideBar} Logout={props.Logout} />
             {sideBarBackCover}
-
+            <Inbox show={showInbox} />
             <header className="userheader">
                 <nav className="userheader__navigation">
-                    <Link to="/home"><div className="userheader__logo"><a href="/">Logo</a></div></Link>
+                    <Link to="/home"><div className="userheader__logo">Logo</div></Link>
 
                     <div className="userheader__sidebarButton">
                         <button onClick={sideBarHandlerShow}>
@@ -53,16 +60,23 @@ const UserHeader = (props) => {
                     <div className="spacer" />
 
                     <div>
-                        <button onClick={props.inboxShow} className="userheader__inboxButton"><img style={{height: "22px"}} src={inboxImage} /></button>
+                        <div onClick={() => setInboxShow(!showInbox)} className="userheader_inboxButton">
+                            {props.unseenCount == 0 ? null : <div className="messageBullet" />}
+                            {props.inboxShow 
+                            ? 
+                                <img className="inboxIcon" src={inboxIconBackgroundOne} />
+                            : 
+                                <img className="inboxIcon" src={inboxIcon} />}
+                        </div>
                     </div>
 
                     <div className="userheader__languageDropDown">
                         <select
                             type="select"
-                            class="languageDropDown"
+                            className="languageDropDown"
                             name="languageDropDown"
                             defaultValue="English"
-                            >
+                        >
                             <option value="English"> English </option>
                             <option value="Urdu"> Urdu </option>
                         </select>
@@ -73,4 +87,16 @@ const UserHeader = (props) => {
     );
 }
 
-export default UserHeader
+const mapStateToProps = (state) => {
+    return {
+        unseenCount: state.inbox.unseenCount,
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+    }
+}
+
+
+export default connect(mapStateToProps,mapDispatchToProps)(UserHeader)

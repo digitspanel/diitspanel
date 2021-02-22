@@ -2,24 +2,38 @@
   "name": "digits-panel",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:3010",
   "dependencies": {
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
+    "activity-detector": "^3.0.0",
+    "axios": "^0.21.0",
     "bootstrap": "^4.5.2",
     "firebase": "^7.21.0",
     "react": "^16.13.1",
+    "react-bootstrap-table-next": "^4.0.3",
+    "react-bootstrap-table2-paginator": "^2.1.2",
+    "react-charts": "^2.0.0-beta.7",
     "react-dom": "^16.13.1",
     "react-firebaseui": "^4.1.0",
     "react-icons": "^3.11.0",
+    "react-idle-timer": "^4.5.0",
     "react-json-pretty": "^2.2.0",
+    "react-redux": "^7.2.2",
+    "react-redux-toastr": "^7.6.5",
     "react-router": "^5.2.0",
     "react-router-dom": "^5.2.0",
+    "react-router-redux": "^4.0.8",
     "react-scripts": "3.4.3",
-    "reactstrap": "^8.5.1"
+    "react-select": "^3.1.1",
+    "reactstrap": "^8.5.1",
+    "redux": "^4.0.5",
+    "redux-thunk": "^2.3.0",
+    "socket.io-client": "^3.0.3"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start": "set PORT=3050 && react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject"
@@ -38,5 +52,8 @@
       "last 1 firefox version",
       "last 1 safari version"
     ]
+  },
+  "devDependencies": {
+    "@types/react-router-dom": "^5.1.6"
   }
 }

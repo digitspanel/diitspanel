@@ -1,34 +1,20 @@
-.SurveyDiv{
-    max-width: 1200px;
+.surveys{
+    display: flex;
+    padding-left: 4px;
+    justify-content: left;
+    align-items: left;
 }
+
+.SurveyDiv{
+    width: 100%;
+}
+
 .SurveyContainer{
+    font-size: 0.8rem;
     display: flex;
     justify-content: center;
     height: 100%;
     width: 100%;
-}
-
-.profilePicDivContainer{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    flex-direction: column;
-    height: 250px;
-    width: 250px;
-    box-shadow: 0px 0px 1px #888888;
-}
-
-.profilePicDiv{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    margin-top: 20px;
-    height: 170px;
-    width: 170px;
-    border: solid 1px;
-    border-radius: 10rem;
-    overflow: hidden;
-    border: solid 8px rgba(0,0,0,0.2);
 }
 
 .centerTheItems{
@@ -60,6 +46,20 @@
 }
 
 @media only screen and (min-width: 501px){
+
+    .surveys{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .SurveyContainer{
+        font-size: 1rem;
+    }
+
+    .SurveyDiv{
+        max-width: 1200px;
+    }
 
     .profilePicDivContainer{
         box-shadow: 0px 0px 0px #888888;

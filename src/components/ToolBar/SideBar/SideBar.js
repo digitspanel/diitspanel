@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import '../SideBar/SideBar.css'
+import './SideBar.css';
 import { Button, Card, CardBody, Col, Container, Input, Row, CustomInput, Label, } from "reactstrap";
 import fire from '../../../fire';
 import { Link } from 'react-router-dom';
@@ -8,6 +8,8 @@ import HomeIconDark from '../../../assets/SidebarIcon/Home_Icon_Dark.png'
 import SurveyIconDark from '../../../assets/SidebarIcon/Survey_Icon_Dark.png'
 import AccountIconDark from '../../../assets/SidebarIcon/Account_Icon_Dark.png'
 import SignOutIconDark from '../../../assets/SidebarIcon/SignOut_Icon.png'
+import * as Actions from '../../../store/actions/authActions' 
+import { connect } from 'react-redux';
 
 const SideBar = (props) => {
     let sideBarClass = 'SideBarContainer';
@@ -21,8 +23,9 @@ const SideBar = (props) => {
     }
 
     const handleLogOut = () => {
+        sessionStorage.removeItem("digitspanel-userAuth");
         fire.auth().signOut();
-        props.Logout();
+        props.setLogin(false);
     }
 
     fire.auth().onAuthStateChanged(User => {
@@ -49,10 +52,22 @@ const SideBar = (props) => {
                 <Link to={"/survey"}><li><img className="sidebaricon" src={SurveyIconDark} />Survey</li></Link>
                 <Link to={"/account"}><li><img className="sidebaricon" src={AccountIconDark} />Account</li></Link>
                 <div className="spacer" />
-                <li onClick={handleLogOut} style={{marginBottom: "25px"}}><img className="sidebaricon" src={SignOutIconDark} />Logout</li>
+                <li onClick={() => handleLogOut()} style={{marginBottom: "25px"}}><img className="sidebaricon" src={SignOutIconDark} />Logout</li>
             </ul>
         </div>
     );
 }
 
-export default SideBar
+const mapStateToProps = (state) => {
+    return {
+
+    }
+}
+
+const mapDispatchToProps = (dispatch) => {
+    return {
+        setLogin: (val) => dispatch(Actions.setLogin(val)),
+    }
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(SideBar)

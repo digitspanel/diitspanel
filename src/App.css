@@ -29,6 +29,17 @@
   margin-left: 0px;
 }
 
+.row {
+  margin-right: 0;
+  margin-left: 0;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
+
 @media only screen and (min-width: 950px){
   .mainContainer{
     margin-left: 300px;

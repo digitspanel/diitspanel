@@ -1,108 +1,59 @@
 import React, { useState, useEffect, useRef } from 'react';
-import SignIn from './auth/SignIn';
-import SignUp from './auth/SignUp';
-import Verfication from './auth/Verfication';
-import Home from './userpages/Home/Home.js';
-import Survey from './userpages/Survey/Survey.js';
-import Account from './userpages/Account/Account.js';
-import UserHeader from './components/ToolBar/Header/UserHeader.js';
 import './App.css';
-import Inbox from './components/Inbox/Inbox.js';
-import fire from './fire';
-import { BrowserRouter, Route, Router, Switch, IndexRoute } from 'react-router-dom';
+import AppLoader from './components/AppLoader'
+import * as UserActions from './store/actions/usersAction';
+import * as AuthActions from './store/actions/authActions';
+import * as Actions from './store/actions/usersAction';
+import * as SurveyActions from './store/actions/surveysAction';
+import { connect, useDispatch } from "react-redux";
+import { Route, Switch, Redirect } from 'react-router-dom';
+import createActivityDetector from 'activity-detector';
+import Routes from "./routes/Routes";
 
 const App = (props) => {
 
-  //Inbox State and Handelling
-  const [inboxState, setInboxState] = useState({
-    inbox: false
-  });
-
-  const inboxStateHandlerShow = () => {
-    setInboxState({
-      inbox: !inboxState.inbox
-    });
-  };
-
-
-  //Login State and Handelling
-  const [userLogedIn, setUserLogedIn] = useState('');
-  const [loader, setLoader] = useState(false);
-  const [onError, setOnError] = useState('');
-
-  const loaderHandler = () => {
-    setLoader(!loader);
-  }
-
-  const Login = () =>{
-    setUserLogedIn(true);
-  }
-
-  const Logout = () =>{
-    setUserLogedIn(false);
-  }
-
-  const authListener = () => {
-    fire.auth().onAuthStateChanged(User => {
-      if (User) {
-        setUserLogedIn(true);
-      }
-      else {
-        setUserLogedIn(false);
-      }
-    });
-  }
+  const dispatch = useDispatch();
 
   useEffect(() => {
-    authListener();
+    dispatch(AuthActions.authentication());
+  },[]);
+
+  // Checking user Activity Status
+
+  useEffect(() => {
+    const activityDetector = createActivityDetector({timeToIdle: 1000 * 60 * 30 });
+    activityDetector.on('idle', () => {
+      const interval = setInterval(() => {
+        props.setActivityStatus("Inactive");
+      }, 6000000);
+      // 120000
+      return () => { clearInterval(interval) }
+    });
+    activityDetector.on('active', () => props.setActivityStatus("Active"));
   }, []);
 
 
-  // Toggle between SignIn and SignUp 
-  const [userSignUp, setUserSignUp] = useState(false);
-
-  const gotoSignUp = () => {
-    setUserSignUp(true);
-  }
-
-  const gotoSignIn = () => {
-    setUserSignUp(false);
-  }
-
   return (
     <>
-        {!userLogedIn
-        ?
-          <>
-            {loader
-            ?
-              <div style={{width: "100%", height: "100vh", backgroundColor: "blue"}} />
-            :
-              <div className="App">
-              
-                {!userSignUp && <SignIn loaderHandlers={loaderHandler} gotoSignUp={gotoSignUp} gotoSignIn={gotoSignIn} Login={Login} />}
-                {userSignUp && <SignUp errorCaption={onError} gotoSignIn={gotoSignIn} />}
-
-              </div>
-            }
-          </>
-        :
-          <main>
-
-            <UserHeader inboxShow={inboxStateHandlerShow} Logout={Logout} />
-            <div className="mainContainer">
-              <Inbox show={inboxState.inbox} />
-              <Switch>
-                <Route path={"/survey"} component={Survey} />
-                <Route path={"/account"} component={Account} />
-                <Route path={"/home"} component={Home} />
-                <Route path={"/"} exact component={Home} />
-              </Switch>
-            </div>
-          </main>
-        }
+        <AppLoader />
+        <Routes />
     </>
   );
 }
 
-export default App;
+const mapStateToProps = (state) => {
+  return {
+  }
+}
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+    setActivityStatus: (val) => dispatch(UserActions.updateUserActivityStatus(val)),
+    setLogin: (val) => dispatch(AuthActions.setLogin(val)),
+    loadSurvey: () => dispatch(SurveyActions.loadList()),
+    fetchUserData: () => dispatch(Actions.loadUser()),
+  }
+}
+
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

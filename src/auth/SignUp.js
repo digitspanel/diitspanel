@@ -1,11 +1,14 @@
 import React, { useState } from 'react';
-import { Button, Card, CardBody, Col, Container, Input, Row, CustomInput,Label, } from "reactstrap";
+import { useHistory } from "react-router-dom";
+import { Button, Spinner, Card, CardBody, Col, Container, Input, Row, CustomInput,Label, } from "reactstrap";
 import { Link } from 'react-router-dom'
 import './SignInUp.css'
 import fire from '../fire'
 import firebase from 'firebase'
 
 const SignUp = (props) => {
+
+    const history = useHistory();
 
     const [onFirstNameTextBoxEmpty, setOnFirstNameTextBoxEmpty] = useState('textBoxStyle');
     const [onLastNameTextBoxEmpty, setOnLastNameTextBoxEmpty] = useState('textBoxStyle');
@@ -15,6 +18,8 @@ const SignUp = (props) => {
     const [onRelationCodeTextBoxEmpty, setOnRelationCodeTextBoxEmpty] = useState('textBoxStyle');
 
     const [errorCaption, setErrorCaption] = useState(props.errorCaption);
+
+    const [loader, setloader] = useState(false);
 
     const onSubmit = () => {
 
@@ -86,24 +91,31 @@ const SignUp = (props) => {
                 setErrorCaption('Please correct the input format of red fields!');
             }
             else{
+                setloader(true);
+                fire.auth().createUserWithEmailAndPassword(EmailId, NewPassword).then((user) => {
 
-                fire.auth().createUserWithEmailAndPassword(EmailId, NewPassword).then(() => {
+                    user.user.updateProfile({
+                        displayName: FirstName + " " + LastName,
+                        
+                      }).then(() => {
+                        user.user.sendEmailVerification().then(() => {
+                            fire.auth().signOut();
+                            setloader(false);
+                            history.push("/signin");
+                        })
+                        .catch((e) => {
+                            setloader(false);
+                            setErrorCaption(e.message);
+                        });
 
-                    fire.auth().onAuthStateChanged(User => {
-                        if(User.emailVerified){
-                        }
-                        else{
-                            fire.auth().onAuthStateChanged((currentUser) => {
-                                currentUser.sendEmailVerification().then(() => {
-                                    setErrorCaption("Please verify your email address to login!");
-                                    fire.auth().signOut();
-                                });
-                            });
-                        }
-                    });
+                      }).catch((e) => {
+                        setloader(false);
+                        setErrorCaption(e.message);
+                      });
 
-                }, (error) => {
-                    setErrorCaption('Unexpected error occured!');
+                }, (e) => {
+                    setloader(false);
+                    setErrorCaption(e.message);
                 });
 
                 setOnEmailTextBoxEmpty('textBoxStyle');
@@ -117,61 +129,67 @@ const SignUp = (props) => {
     
 
     return (
-        <div className="SignInContainer">
-            <div className="SignInInnerBoxContainer">
-                <Row>
-                    <Col style={{height: "30px", width: "100%"}}>
-                        <h5>Sign Up</h5>
-                    </Col>
-                </Row>
-                <div className="SignInInnerBox">
-                    <Container fluid>
+        <div className="App">
+            <div className="SignInContainer">
+                <div className="SignInInnerBoxContainer">
+                    <Row>
+                        <Col style={{ height: "30px", width: "100%" }}>
+                            <h5>Sign Up</h5>
+                        </Col>
+                    </Row>
+                    <div className="SignInInnerBox">
+                        <Container fluid>
+                            <Row>
+                                <Col style={{ height: "100px", border: "solid 1px" }} xs="4"></Col>
+                            </Row>
 
-                        <Row>
-                            <Col style={{height: "100px", border: "solid 1px"}} xs="4"></Col>
-                        </Row>
+                            <Row style={{ height: "30px" }}><span style={{ color: "red", fontSize: "0.8rem" }}>{errorCaption}</span></Row>
 
-                        <Row style={{height: "30px"}}><span style={{color: "red", fontSize: "0.8rem"}}>{errorCaption}</span></Row>
+                            <Row>
+                                <Col xs="5" style={{ padding: "0 0 0 0" }}><input className={onFirstNameTextBoxEmpty} id="FirstName" type="text" placeholder="First Name"></input></Col>
+                                <Col xs="2" style={{ padding: "0 0 0 0" }}></Col>
+                                <Col xs="5" style={{ padding: "0 0 0 0" }}><input className={onLastNameTextBoxEmpty} id="LastName" type="text" placeholder="Last Name"></input></Col>
+                            </Row>
 
-                        <Row>
-                            <Col xs="5" style={{padding: "0 0 0 0"}}><input className={onFirstNameTextBoxEmpty} id="FirstName" type="text" placeholder="First Name"></input></Col>
-                            <Col xs="2" style={{padding: "0 0 0 0"}}></Col>
-                            <Col xs="5" style={{padding: "0 0 0 0"}}><input className={onLastNameTextBoxEmpty} id="LastName" type="text" placeholder="Last Name"></input></Col>
-                        </Row>
+                            <Row style={{ height: "20px" }}></Row>
 
-                        <Row style={{height: "20px"}}></Row>
-
-                        <Row>
+                            <Row>
                                 <input className={onEmailTextBoxEmpty} id="EmailId" type="text" placeholder="Email Id"></input>
-                        </Row>
+                            </Row>
 
-                        <Row style={{height: "20px"}}></Row>
+                            <Row style={{ height: "20px" }}></Row>
 
-                        <Row>
+                            <Row>
                                 <input className={onNewPasswordTextBoxEmpty} id="NewPassword" type="password" placeholder="New Password"></input>
-                        </Row>
+                            </Row>
 
-                        <Row style={{height: "20px"}}></Row>
+                            <Row style={{ height: "20px" }}></Row>
 
-                        <Row>
+                            <Row>
                                 <input className={onConfirmPasswordTextBoxEmpty} id="ConfirmPassword" type="password" placeholder="Confirm Password"></input>
-                        </Row>
+                            </Row>
 
-                        <Row style={{height: "20px"}}></Row>
+                            <Row style={{ height: "20px" }}></Row>
 
-                        <Row>
+                            <Row>
                                 <input className={onRelationCodeTextBoxEmpty} id="RealtionCode" type="text" placeholder="Relation Code"></input>
-                        </Row>
+                            </Row>
 
-                        <Row style={{height: "20px"}}></Row>
+                            <Row style={{ height: "20px" }}></Row>
 
-                        <Row>
-                            <Col xs="9">
-                                <Row><p style={{fontSize: "13px"}}>Already have account <Link onClick={props.gotoSignIn}>Sign In</Link></p></Row>
-                            </Col>
-                            <Col xs="3" style={{padding: "0 0 0 0"}}><Button onClick={onSubmit} style={{width: "90px"}} value="SignIn">Sign Up</Button></Col>
-                        </Row>
-                    </Container>
+                            <Row>
+                                <Col>
+                                    <Row>
+                                        <p style={{ fontSize: "13px" }}>Already have account <Link to="/signin">Sign In</Link></p>
+                                        <div style={{flex: "1"}} />
+                                        {loader ?
+                                            <Spinner /> :
+                                            <Button onClick={onSubmit} style={{ width: "90px" }} value="SignIn">Sign Up</Button>}
+                                    </Row>
+                                </Col>
+                            </Row>
+                        </Container>
+                    </div>
                 </div>
             </div>
         </div>
